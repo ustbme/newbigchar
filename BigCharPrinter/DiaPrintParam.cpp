@@ -319,11 +319,13 @@ void CDiaPrintParam::OnBnClickedButReadeffectdate()
 
 
 	file.ReadString( strText ) ;
-	//strText += "\n";
+
+	strText += "\n";
 	SetDlgItemText(IDC_DATE_Effectdate,strText);
 
 	file.ReadString( strText ) ;
-	//strText += "\n";
+	strText += "\n";
+
 	SetDlgItemText(IDC_EDIT_Effect, strText);
 
 
