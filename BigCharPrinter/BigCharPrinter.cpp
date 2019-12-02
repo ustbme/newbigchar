@@ -103,7 +103,7 @@ BOOL CBigCharPrinterApp::InitInstance()
 		return FALSE;
 
 	HWND hwnd = AfxGetApp()->GetMainWnd()->GetSafeHwnd();   //获取主窗口句柄
-	SetWindowPos(hwnd, HWND_NOTOPMOST, 50,50,1024,700,SWP_NOMOVE);
+	SetWindowPos(hwnd, HWND_NOTOPMOST, 50,50,1224,700,SWP_NOMOVE);
 
 	// 唯一的一个窗口已初始化，因此显示它并对其进行更新
 	m_pMainWnd->ShowWindow(SW_SHOW);

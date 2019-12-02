@@ -99,6 +99,11 @@
     <None Include="res\BigCharPrinter.rc2" />
     <None Include="res\BigCharPrinterDoc.ico" />
     <None Include="res\bitmap1.bmp" />
+    <None Include="res\bitmap2.bmp" />
+    <None Include="res\bitmap3.bmp" />
+    <None Include="res\bitmap6.bmp" />
+    <None Include="res\icon1.ico" />
+    <None Include="res\open_tree.bmp" />
     <None Include="res\output_wnd.ico" />
     <None Include="res\output_wnd_hc.ico" />
     <None Include="res\Toolbar.bmp" />
@@ -111,20 +116,28 @@
     <ClInclude Include="BigCharPrinterDoc.h" />
     <ClInclude Include="BigCharPrinterView.h" />
     <ClInclude Include="BtnST.h" />
+    <ClInclude Include="CharObject.h" />
+    <ClInclude Include="CSTPSerialPort.h" />
     <ClInclude Include="DiaClassSetting.h" />
     <ClInclude Include="DiaCounter.h" />
     <ClInclude Include="DiaCustomIcon.h" />
     <ClInclude Include="DiaMouthClean.h" />
     <ClInclude Include="DiaPrintControl.h" />
     <ClInclude Include="DiaPrintEdit.h" />
+    <ClInclude Include="DiaPrinterManage.h" />
     <ClInclude Include="DiaPrintParam.h" />
     <ClInclude Include="DiaSystemSetting.h" />
+    <ClInclude Include="IOVsd.h" />
     <ClInclude Include="LeftView.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MyLogCpp.h" />
+    <ClInclude Include="ObjectFileDeal.h" />
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="tinystr.h" />
+    <ClInclude Include="tinyxml.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BCMenu.cpp" />
@@ -132,21 +145,31 @@
     <ClCompile Include="BigCharPrinterDoc.cpp" />
     <ClCompile Include="BigCharPrinterView.cpp" />
     <ClCompile Include="BtnST.cpp" />
+    <ClCompile Include="CharObject.cpp" />
+    <ClCompile Include="CSTPSerialPort.cpp" />
     <ClCompile Include="DiaClassSetting.cpp" />
     <ClCompile Include="DiaCounter.cpp" />
     <ClCompile Include="DiaCustomIcon.cpp" />
     <ClCompile Include="DiaMouthClean.cpp" />
     <ClCompile Include="DiaPrintControl.cpp" />
     <ClCompile Include="DiaPrintEdit.cpp" />
+    <ClCompile Include="DiaPrinterManage.cpp" />
     <ClCompile Include="DiaPrintParam.cpp" />
     <ClCompile Include="DiaSystemSetting.cpp" />
+    <ClCompile Include="IOVsd.cpp" />
     <ClCompile Include="LeftView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MyLogCpp.cpp" />
+    <ClCompile Include="ObjectFileDeal.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="tinystr.cpp" />
+    <ClCompile Include="tinyxml.cpp" />
+    <ClCompile Include="tinyxmlerror.cpp" />
+    <ClCompile Include="tinyxmlparser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BigCharPrinter.rc" />

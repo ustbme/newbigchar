@@ -22,6 +22,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedButOpenFile();
-	CButtonST m_ButOpenFile;
+//	CButtonST m_ButOpenFile;
 	virtual BOOL OnInitDialog();
 };

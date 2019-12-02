@@ -24,7 +24,7 @@ CDiaPrintControl::~CDiaPrintControl()
 void CDiaPrintControl::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_BUT_OPEN_FILE, m_ButOpenFile);
+//	DDX_Control(pDX, IDC_BUT_OPEN_FILE, m_ButOpenFile);
 }
 
 
@@ -48,9 +48,9 @@ BOOL CDiaPrintControl::OnInitDialog()
 
 	// TODO:  在此添加额外的初始化
 
-	m_ButOpenFile.SetBitmaps(IDB_BITMAP1,RGB(255,255,255),IDB_BITMAP1,RGB(255,255,255));
-	m_ButOpenFile.DrawTransparent(true);
-	m_ButOpenFile.SetFlat(1);
+	//m_ButOpenFile.SetBitmaps(IDB_BITMAP1,RGB(255,255,255),IDB_BITMAP1,RGB(255,255,255));
+	//m_ButOpenFile.DrawTransparent(true);
+	//m_ButOpenFile.SetFlat(1);
 
 
 	return TRUE;  // return TRUE unless you set the focus to a control

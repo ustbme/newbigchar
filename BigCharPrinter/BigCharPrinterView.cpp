@@ -1,10 +1,10 @@
-
-// BigCharPrinterView.cpp : CBigCharPrinterView ÀàµÄÊµÏÖ
+ï»¿
+// BigCharPrinterView.cpp : CBigCharPrinterView ç±»çš„å®ç°
 //
 
 #include "stdafx.h"
-// SHARED_HANDLERS ¿ÉÒÔÔÚÊµÏÖÔ¤ÀÀ¡¢ËõÂÔÍ¼ºÍËÑË÷É¸Ñ¡Æ÷¾ä±úµÄ
-// ATL ÏîÄ¿ÖĞ½øĞĞ¶¨Òå£¬²¢ÔÊĞíÓë¸ÃÏîÄ¿¹²ÏíÎÄµµ´úÂë¡£
+// SHARED_HANDLERS å¯ä»¥åœ¨å®ç°é¢„è§ˆã€ç¼©ç•¥å›¾å’Œæœç´¢ç­›é€‰å™¨å¥æŸ„çš„
+// ATL é¡¹ç›®ä¸­è¿›è¡Œå®šä¹‰ï¼Œå¹¶å…è®¸ä¸è¯¥é¡¹ç›®å…±äº«æ–‡æ¡£ä»£ç ã€‚
 #ifndef SHARED_HANDLERS
 #include "BigCharPrinter.h"
 #endif
@@ -16,6 +16,7 @@
 #define new DEBUG_NEW
 #endif
 
+ 
 
 // CBigCharPrinterView
 
@@ -32,15 +33,15 @@ BEGIN_MESSAGE_MAP(CBigCharPrinterView, CFormView)
 	ON_BN_CLICKED(IDC_BUT_PRINT_CONTROL, &CBigCharPrinterView::OnBnClickedButPrintControl)
 	ON_BN_CLICKED(IDC_BUT_COUNTER, &CBigCharPrinterView::OnBnClickedButCounter)
 	ON_BN_CLICKED(IDC_BUT_CLASS_SETTING, &CBigCharPrinterView::OnBnClickedButClassSetting)
+	ON_BN_CLICKED(IDC_BUT_PRINTER_MANAGE, &CBigCharPrinterView::OnBnClickedButPrinterManage)
 END_MESSAGE_MAP()
 
-// CBigCharPrinterView ¹¹Ôì/Îö¹¹
+// CBigCharPrinterView æ„é€ /ææ„
 
 CBigCharPrinterView::CBigCharPrinterView()
 	: CFormView(CBigCharPrinterView::IDD)
 {
-	// TODO: ÔÚ´Ë´¦Ìí¼Ó¹¹Ôì´úÂë
-
+	// TODO: åœ¨æ­¤å¤„æ·»åŠ æ„é€ ä»£ç 
 }
 
 CBigCharPrinterView::~CBigCharPrinterView()
@@ -54,8 +55,9 @@ void CBigCharPrinterView::DoDataExchange(CDataExchange* pDX)
 
 BOOL CBigCharPrinterView::PreCreateWindow(CREATESTRUCT& cs)
 {
-	// TODO: ÔÚ´Ë´¦Í¨¹ıĞŞ¸Ä
-	//  CREATESTRUCT cs À´ĞŞ¸Ä´°¿ÚÀà»òÑùÊ½
+	// TODO: åœ¨æ­¤å¤„é€šè¿‡ä¿®æ”¹
+	//  CREATESTRUCT cs æ¥ä¿®æ”¹çª—å£ç±»æˆ–æ ·å¼
+
 
 	return CFormView::PreCreateWindow(cs);
 }
@@ -65,6 +67,8 @@ void CBigCharPrinterView::OnInitialUpdate()
 	CFormView::OnInitialUpdate();
 	GetParentFrame()->RecalcLayout();
 	ResizeParentToFit();
+
+
 
 	CRect rc;
 	GetClientRect(rc);
@@ -82,6 +86,14 @@ void CBigCharPrinterView::OnInitialUpdate()
 	m_dlgCounter = new CDiaCounter;
 	m_dlgClassSetting = new CDiaClassSetting;
 
+	m_dlgPrinterManage = new CDiaPrinterManage;
+	
+	int nX = 50;
+	int nY = 140;
+	int nWidth = 1000;
+	int nHeight = 450;
+
+
 
 	/*pDlg1 = new CDiatest1(this);
 
@@ -90,15 +102,12 @@ void CBigCharPrinterView::OnInitialUpdate()
 
 	pDlg2->Create(IDD_DIALOG2,this);*/
 
-	int nX = 100;
-	int nY = 100;
-	int nWidth = 900;
-	int nHeight = 600;
+
 
 	m_dlgPrintEdit->Create(IDD_DIA_PRINT_EDIT,this);
 	m_dlgPrintEdit->SetFont(&afxGlobalData.fontRegular);	 
 	m_dlgPrintEdit->MoveWindow(nX,nY,nWidth,nHeight);
-
+	
 	m_dlgPrintControl->Create(IDD_DIA_PRINT_CONTROL,this);
 	m_dlgPrintControl->SetFont(&afxGlobalData.fontBold);
 	m_dlgPrintControl->MoveWindow(nX,nY,nWidth,nHeight);
@@ -127,17 +136,202 @@ void CBigCharPrinterView::OnInitialUpdate()
 	m_dlgClassSetting->SetFont(&afxGlobalData.fontDefaultGUIBold);
 	m_dlgClassSetting->MoveWindow(nX,nY,nWidth,nHeight);
 
+	m_dlgPrinterManage->Create(IDD_DIA_PRINTER_MANAGE,this);
+	m_dlgPrinterManage->SetFont(&afxGlobalData.fontDefaultGUIBold);
+	m_dlgPrinterManage->MoveWindow(nX,nY,nWidth,nHeight);
 
-	//m_tab.AddTab(m_dlgPrintEdit,L"´òÓ¡±à¼­");
-	//m_tab.AddTab(m_dlgPrintControl,L"´òÓ¡ÉèÖÃ");
-	//m_tab.AddTab(m_dlgMouthClean,L"ÅçÍ·ÇåÏ´");
-	//m_tab.AddTab(m_dlgPrintParam,L"´òÓ¡±äÁ¿");
-	//m_tab.AddTab(m_dlgCustomIcon,L"Í¼°¸±à¼­");
-	//m_tab.AddTab(m_dlgSystemSetting,L"ÏµÍ³ÉèÖÃ");
+	//å½©è‰²å›¾æ ‡è®¾ç½®
+	m_ButPrintEdit.SubclassDlgItem(IDC_BUT_PRINT_EDIT,this);
+ 	m_ButPrintEdit.SetBitmaps(IDB_BITMAP4,RGB(255,255,255));
+	m_ButPrintEdit.DrawTransparent(true);
+	m_ButPrintEdit.SetFlat(0);
+	m_ButPrintEdit.SetTooltipText(L"æ‰“å°ç¼–è¾‘");
+	m_ButPrintEdit.SetAlign(CButtonST::ST_ALIGN_VERT);
+
+	m_ButPrintParam.SubclassDlgItem(IDC_BUT_PRINT_PARAM,this);
+	/*m_ButPrintParam.SetBitmaps(IDB_BITMAP3,RGB(255,255,255));
+	m_ButPrintParam.DrawTransparent(true);
+	m_ButPrintParam.SetFlat(0);
+	m_ButPrintParam.SetAlign(CButtonST::ST_ALIGN_VERT);
+	*/
+	m_ButPrintParam.SetTooltipText(L"æ‰“å°å‚æ•°");
+	m_ButPrintParam.SetBitmaps(IDB_BITMAP5,RGB(255,255,255));
+	m_ButPrintParam.DrawBorder(FALSE);
+	m_ButPrintParam.SetFlat(1);
+//	m_ButPrintParam.SetColor(CButtonST::BTNST_COLOR_BK_OUT, RGB(255,0,0));
+//	m_ButPrintParam.SetColor(CButtonST::BTNST_COLOR_BK_IN, RGB(0,208,0));
+//	m_ButPrintParam.SetColor(CButtonST::BTNST_COLOR_BK_FOCUS, RGB(0,0,208));
 
 
-	//m_tab.EnableActiveTabCloseButton();//ÊÇ·ñÌí¼Ó¹Ø±ÕÑ¡Ïî¿¨°´Å¥
-//	m_tab.SetActiveTab(0); //¼¤»îÑ¡Ïî¿¨,ÒÔµ±Ç°Ñ¡Ïî¿¨ÎªµÚÒ»Ò³¡£
+
+	m_ButPrintClean.SubclassDlgItem(IDC_BUT_CLEAN,this);
+	m_ButPrintClean.SetBitmaps(IDB_BITMAP1,RGB(255,255,255));
+	m_ButPrintClean.DrawTransparent(true);
+	m_ButPrintClean.SetFlat(0);
+	m_ButPrintClean.SetTooltipText(L"å–·å¤´æ¸…æ´—");
+	m_ButPrintClean.SetAlign(CButtonST::ST_ALIGN_VERT);
+
+	m_ButPrintControl.SubclassDlgItem(IDC_BUT_PRINT_CONTROL,this);
+	m_ButPrintControl.SetBitmaps(IDB_BITMAP1,RGB(255,255,255));
+	m_ButPrintControl.DrawTransparent(true);
+	m_ButPrintControl.SetFlat(0);
+	m_ButPrintControl.SetTooltipText(L"æ‰“å°æ§åˆ¶");
+	m_ButPrintControl.SetAlign(CButtonST::ST_ALIGN_VERT);
+
+	m_ButPrintCounter.SubclassDlgItem(IDC_BUT_COUNTER,this);
+	m_ButPrintCounter.SetBitmaps(IDB_BITMAP1,RGB(255,255,255));
+	m_ButPrintCounter.DrawTransparent(true);
+	m_ButPrintCounter.SetFlat(0);
+	m_ButPrintCounter.SetTooltipText(L"æ‰“å°è®¡æ•°");
+	m_ButPrintCounter.SetAlign(CButtonST::ST_ALIGN_VERT);
+
+	m_ButPrintIcon.SubclassDlgItem(IDC_BUT_ICON,this);
+	m_ButPrintIcon.SetBitmaps(IDB_BITMAP1,RGB(255,255,255));
+	m_ButPrintIcon.DrawTransparent(true);
+	m_ButPrintIcon.SetFlat(0);
+	m_ButPrintIcon.SetTooltipText(L"æ‰“å°å›¾æ ‡");
+	m_ButPrintIcon.SetAlign(CButtonST::ST_ALIGN_VERT);
+
+	m_ButPrintClass.SubclassDlgItem(IDC_BUT_CLASS_SETTING,this);
+	m_ButPrintClass.SetBitmaps(IDB_BITMAP1,RGB(255,255,255));
+	m_ButPrintClass.DrawTransparent(true);
+	m_ButPrintClass.SetFlat(0);
+	m_ButPrintClass.SetTooltipText(L"ç­æ¬¡è®¾å®š");
+	m_ButPrintClass.SetAlign(CButtonST::ST_ALIGN_VERT);
+
+	m_ButPrintSystem.SubclassDlgItem(IDC_BUT_SYSTEM,this);
+	m_ButPrintSystem.SetBitmaps(IDB_BITMAP1,RGB(255,255,255));
+	m_ButPrintSystem.DrawTransparent(true);
+	m_ButPrintSystem.SetFlat(0);
+	m_ButPrintSystem.SetTooltipText(L"ç³»ç»Ÿè®¾ç½®");
+	m_ButPrintSystem.SetAlign(CButtonST::ST_ALIGN_VERT);
+
+	m_ButPrinterManage.SubclassDlgItem(IDC_BUT_PRINTER_MANAGE,this);
+	m_ButPrinterManage.SetBitmaps(IDB_BITMAP1,RGB(255,255,255));
+	m_ButPrinterManage.DrawTransparent(true);
+	m_ButPrinterManage.SetFlat(0);
+	m_ButPrinterManage.SetTooltipText(L"è®¾å¤‡ç®¡ç†");
+	m_ButPrinterManage.SetAlign(CButtonST::ST_ALIGN_VERT);
+
+	//m_dlgPrinterManage->ShowWindow(SW_SHOW);
+	m_dlgPrintEdit->ShowWindow(SW_SHOW);
+
+
+	InitCommMsg();//åˆå§‹åŒ–ä¸²å£
+}
+
+void CBigCharPrinterView::GetDataStr(CString strTree,CString strFileName,CString strParam,CString &strContent)
+{
+	//å…ˆè·å–æ–‡ä»¶å¤§å°,åœ¨ç¡®å®šéœ€è¦å¤šå°‘ç©ºé—´æ¥å­˜æ”¾æ•°æ®åº“è¿æ¥ä¿¡æ¯
+	CFileStatus status;
+	long lFileSize = 0;
+	if (CFile::GetStatus(strFileName,status))
+	{
+		lFileSize = status.m_size;
+	}
+	USES_CONVERSION; 
+
+	if (lFileSize > 0)
+	{
+		WCHAR* pDataSource = new WCHAR[lFileSize+1];
+		memset(pDataSource,0,lFileSize+1);
+		DWORD dwReadSize = GetPrivateProfileString(strTree,strParam, L"",pDataSource, lFileSize, strFileName);
+		if (dwReadSize != 0)
+		{
+			strContent.Format(_T("%s"),pDataSource);
+		}
+
+		delete[] pDataSource;
+	}
+}
+
+void CBigCharPrinterView::InitCommMsg()
+{
+	CString strContent = _T("");
+	CString strTree = _T("");//æ ‘å¹²
+	CString	strLeaf = _T("");//æ ‘å¶åç§°
+	MyDcb   tempDcb;
+	int     nComNum = 0;
+	int     i=0;
+	char *p = NULL;
+	char szLocalInfoConfigFileName[512] = {0};
+	CString strConfigFile;
+	/* è·å¾—æ–‡ä»¶è·¯å¾„ */
+	USES_CONVERSION; 
+
+	//if(0 == GetModuleFileName(NULL, A2W(szLocalInfoConfigFileName), 512))
+	//{
+	//	return;//è·å–è·¯å¾„å¤±è´¥
+	//}
+//	p = strrchr(szLocalInfoConfigFileName, '\\');
+//	*p = 0;
+	strConfigFile.Format(_T("%s"),_T("..\\bin\\SerialPortSet.ini"));
+
+	strTree = _T("æœ¬åœ°ä¸²å£æ•°é…ç½®");
+	strLeaf = _T("æœ¬åœ°ä¸²å£æ•°");
+	GetDataStr(strTree,strConfigFile,strLeaf,strContent);
+	nComNum = atoi(W2A(strContent.GetBuffer(0)));//ä¸²å£ä¸ªæ•°(ä¿®æ”¹æˆ1)
+	for (i=0; i<nComNum; i++)
+	{
+		memset(&tempDcb,0,sizeof(MyDcb));
+		//ç›®å‰æ ‘å¹²ä¸ºï¼š  ä¸»æœºé…ç½®ä¿¡æ¯
+		strTree.Format(_T("ä¸²å£é…ç½®%d"),i+1);
+		//æ ‘å¶ä¸º:ç«¯å£ 
+		strLeaf = "ç«¯å£";
+		GetDataStr(strTree,strConfigFile,strLeaf,strContent);
+		tempDcb.nComPort = atoi(W2A(strContent));
+
+		strLeaf = "æ³¢ç‰¹ç‡";
+		GetDataStr(strTree,strConfigFile,strLeaf,strContent);
+		tempDcb.BaudRate = atol(W2A(strContent));
+
+		strLeaf = "æ ¡éªŒä½";
+		GetDataStr(strTree,strConfigFile,strLeaf,strContent);
+		tempDcb.Parity = (BYTE)atoi(W2A(strContent));
+
+		strLeaf = "æ•°æ®ä½";
+		GetDataStr(strTree,strConfigFile,strLeaf,strContent);
+		tempDcb.ByteSize = (BYTE)atoi(W2A(strContent));
+
+		strLeaf = "åœæ­¢ä½";
+		GetDataStr(strTree,strConfigFile,strLeaf,strContent);
+		tempDcb.StopBits = (BYTE)atoi(W2A(strContent));
+
+		strLeaf = "æ˜¯å¦å­˜å‚¨";
+		GetDataStr(strTree,strConfigFile,strLeaf,strContent);
+		tempDcb.bIsSave = (BOOL)atoi(W2A(strContent));
+
+		// 		m_vsd.SetParentPoint(this);
+		m_vsd[i].SetComIndx(tempDcb.nComPort);
+		if (!m_vsd[i].OpenComm(tempDcb))
+		{
+			CString csMsg = _T("");
+			csMsg.Format(_T("ä¸²å£%dæ‰“å¼€å¤±è´¥!"),tempDcb.nComPort);
+			AfxMessageBox(csMsg);
+		}
+	}
+
+	//m_pThreadSend = AfxBeginThread(
+	//	ThreadProc_SendAndDataProc,
+	//	(LPVOID)this,
+	//	THREAD_PRIORITY_NORMAL,
+	//	0,
+	//	CREATE_SUSPENDED
+	//	);
+	//ASSERT(m_pThreadSend);
+	//m_pThreadSend->m_bAutoDelete = FALSE;
+	//m_pThreadSend->ResumeThread();
+
+	/*m_pThreadRecv = AfxBeginThread(
+	ThreadProc_RecvData,
+	(LPVOID)this,
+	THREAD_PRIORITY_NORMAL,
+	0,
+	CREATE_SUSPENDED
+	);
+	ASSERT(m_pThreadRecv);
+	m_pThreadRecv->m_bAutoDelete = FALSE;
+	m_pThreadRecv->ResumeThread();*/
 }
 
 void CBigCharPrinterView::OnRButtonUp(UINT /* nFlags */, CPoint point)
@@ -154,7 +348,7 @@ void CBigCharPrinterView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 }
 
 
-// CBigCharPrinterView Õï¶Ï
+// CBigCharPrinterView è¯Šæ–­
 
 #ifdef _DEBUG
 void CBigCharPrinterView::AssertValid() const
@@ -167,7 +361,7 @@ void CBigCharPrinterView::Dump(CDumpContext& dc) const
 	CFormView::Dump(dc);
 }
 
-CBigCharPrinterDoc* CBigCharPrinterView::GetDocument() const // ·Çµ÷ÊÔ°æ±¾ÊÇÄÚÁªµÄ
+CBigCharPrinterDoc* CBigCharPrinterView::GetDocument() const // éè°ƒè¯•ç‰ˆæœ¬æ˜¯å†…è”çš„
 {
 	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CBigCharPrinterDoc)));
 	return (CBigCharPrinterDoc*)m_pDocument;
@@ -175,7 +369,7 @@ CBigCharPrinterDoc* CBigCharPrinterView::GetDocument() const // ·Çµ÷ÊÔ°æ±¾ÊÇÄÚÁª
 #endif //_DEBUG
 
 
-// CBigCharPrinterView ÏûÏ¢´¦Àí³ÌĞò
+// CBigCharPrinterView æ¶ˆæ¯å¤„ç†ç¨‹åº
 
 void CBigCharPrinterView::ShowDialogByID(int ID)
 {
@@ -187,98 +381,106 @@ void CBigCharPrinterView::ShowDialogByID(int ID)
 	m_dlgSystemSetting->ShowWindow(SW_HIDE);
 	m_dlgCounter->ShowWindow(SW_HIDE);
 	m_dlgClassSetting->ShowWindow(SW_HIDE);
+	m_dlgPrinterManage->ShowWindow(SW_HIDE);
 
 	if(ID == IDD_DIA_PRINT_EDIT)
 	{
+		GetDlgItem(IDC_STATIC_DIA_NAME)->SetWindowText(L"æ‰“å°ç¼–è¾‘");
 		m_dlgPrintEdit->ShowWindow(SW_SHOW);
 	}
 	else if(ID == IDD_DIA_PRINT_CONTROL)			
 	{
+		GetDlgItem(IDC_STATIC_DIA_NAME)->SetWindowText(L"æ‰“å°æ§åˆ¶");
 		m_dlgPrintControl->ShowWindow(SW_SHOW);
 	}
 	else if(ID == IDD_DIA_MOUTH_CLEAN)			
 	{
+		GetDlgItem(IDC_STATIC_DIA_NAME)->SetWindowText(L"å–·å¤´æ¸…æ´—");
 		m_dlgMouthClean->ShowWindow(SW_SHOW);
 	}
 	else if(ID == IDD_DIA_PRINT_PARAM)			
 	{
+		GetDlgItem(IDC_STATIC_DIA_NAME)->SetWindowText(L"æ‰“å°å‚æ•°");
 		m_dlgPrintParam->ShowWindow(SW_SHOW);
 	}
 	else if(ID == IDD_DIA_CUSTOM_ICON)			
 	{
+		GetDlgItem(IDC_STATIC_DIA_NAME)->SetWindowText(L"æ‰“å°å›¾æ ‡");
 		m_dlgCustomIcon->ShowWindow(SW_SHOW);
 	}
 	else if(ID == IDD_DIA_SYSTEM_SETTING)			
 	{
+		GetDlgItem(IDC_STATIC_DIA_NAME)->SetWindowText(L"ç³»ç»Ÿè®¾ç½®");
 		m_dlgSystemSetting->ShowWindow(SW_SHOW);
 	}
 	else if(ID == IDD_DIA_COUNTER)			
 	{
+		GetDlgItem(IDC_STATIC_DIA_NAME)->SetWindowText(L"æ‰“å°è®¡æ•°");
 		m_dlgCounter->ShowWindow(SW_SHOW);
 	}
 	else if(ID == IDD_DIA_CLASS_SETTING)			
 	{
+		GetDlgItem(IDC_STATIC_DIA_NAME)->SetWindowText(L"ç­æ¬¡è®¾å®š");
 		m_dlgClassSetting->ShowWindow(SW_SHOW);
 	}
-	
+	else if(ID == IDD_DIA_PRINTER_MANAGE)			
+	{
+		GetDlgItem(IDC_STATIC_DIA_NAME)->SetWindowText(L"è®¾å¤‡ç®¡ç†");
+		m_dlgPrinterManage->ShowWindow(SW_SHOW);
+	}	
 }
-
 
 void CBigCharPrinterView::OnBnClickedButPrintEdit()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 
 	ShowDialogByID(IDD_DIA_PRINT_EDIT);
-
 }
 
 void CBigCharPrinterView::OnBnClickedButPrintParam()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	ShowDialogByID(IDD_DIA_PRINT_PARAM);
 }
 
-
 void CBigCharPrinterView::OnBnClickedButIcon()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	ShowDialogByID(IDD_DIA_CUSTOM_ICON);
 }
 
-
 void CBigCharPrinterView::OnBnClickedButSystem()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	ShowDialogByID(IDD_DIA_SYSTEM_SETTING);
 }
 
-
 void CBigCharPrinterView::OnBnClickedButClean()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	ShowDialogByID(IDD_DIA_MOUTH_CLEAN);
 }
 
-
 void CBigCharPrinterView::OnBnClickedButPrintControl()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	ShowDialogByID(IDD_DIA_PRINT_CONTROL);
 }
 
-
 void CBigCharPrinterView::OnBnClickedButCounter()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
-
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	 ShowDialogByID(IDD_DIA_COUNTER);
-
 }
-
 
 void CBigCharPrinterView::OnBnClickedButClassSetting()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	ShowDialogByID(IDD_DIA_CLASS_SETTING);
+}
 
+void CBigCharPrinterView::OnBnClickedButPrinterManage()
+{
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+	ShowDialogByID(IDD_DIA_PRINTER_MANAGE);
 }

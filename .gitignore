@@ -38,3 +38,4 @@ BigCharPrinter/Debug/link-cvtres.read.1.tlog
 *.idb
 *.obj
 *.opensdf
+*.rc
